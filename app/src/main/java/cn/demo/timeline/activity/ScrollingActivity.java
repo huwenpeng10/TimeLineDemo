@@ -1,4 +1,4 @@
-package cn.demo.timeline;
+package cn.demo.timeline.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import cn.demo.timeline.R;
 
 public class ScrollingActivity extends AppCompatActivity {
 

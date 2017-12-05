@@ -7,7 +7,7 @@
     tools:showIn="@layout/activity_scrolling"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.demo.timeline.ScrollingActivity">
+    tools:context="cn.demo.timeline.activity.ScrollingActivity">
 
     <TextView
         android:layout_width="wrap_content"

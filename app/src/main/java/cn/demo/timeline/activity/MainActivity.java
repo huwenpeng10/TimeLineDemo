@@ -1,12 +1,20 @@
-package cn.demo.timeline;
+package cn.demo.timeline.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 
+import java.lang.reflect.Field;
+
+import cn.demo.timeline.AndroidBug5497Workaround;
+import cn.demo.timeline.R;
 import cn.demo.timeline.adapter.TimeLineAdapter;
 import cn.demo.timeline.entity.TimeLine;
 
@@ -23,10 +31,43 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidBug5497Workaround.assistActivity(findViewById(android.R.id.content));
         setContentView(R.layout.activity_main);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+
+        LinearLayout linear_bar = (LinearLayout) findViewById(R.id.ll);
+        linear_bar.setVisibility(View.VISIBLE);
+        //获取到状态栏的高度
+        int statusHeight = getStatusBarHeight();
+        //动态的设置隐藏布局的高度
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) linear_bar.getLayoutParams();
+        params.height = statusHeight;
+        linear_bar.setLayoutParams(params);
 
         initData();
         initView();
+    }
+
+    /**
+     * 通过反射的方式获取状态栏高度
+     * @return
+     */
+    private int getStatusBarHeight() {
+        try {
+            Class<?> c = Class.forName("com.android.internal.R$dimen");
+            Object obj = c.newInstance();
+            Field field = c.getField("status_bar_height");
+            int x = Integer.parseInt(field.get(obj).toString());
+            return getResources().getDimensionPixelSize(x);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     private void initView() {

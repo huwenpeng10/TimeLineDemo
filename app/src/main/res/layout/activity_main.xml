@@ -2,11 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:background="@color/mine_bg_two">
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+</LinearLayout>
+    <!--颜色被我设置成了与Toolbar一样-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我要试都试都"/>
     <ExpandableListView
         android:id="@+id/main_elv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:hint="dfjkds"/>
 
 </LinearLayout>
