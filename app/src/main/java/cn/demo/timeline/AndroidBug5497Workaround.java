@@ -10,7 +10,7 @@ import android.view.ViewTreeObserver;
  */
 
 public class AndroidBug5497Workaround {
-    public static void assistActivity(View content) {
+     public static void assistActivity(View content) {
         new AndroidBug5497Workaround(content);
     }
 

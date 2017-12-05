@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AndroidBug5497Workaround.assistActivity(findViewById(android.R.id.content));
         setContentView(R.layout.activity_main);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) linear_bar.getLayoutParams();
         params.height = statusHeight;
         linear_bar.setLayoutParams(params);
-
+        AndroidBug5497Workaround.assistActivity(findViewById(android.R.id.content));
         initData();
         initView();
     }
